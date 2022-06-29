@@ -18,7 +18,7 @@ paymentScene.enter((ctx) =>
       reply_markup: {
         keyboard: [
           ["1 - Oylik", "3 - Oylik (+Avtobus)"],
-          ["2 - Yillik", "4 - (+Yotoqxona)"],
+          ["2 - Yillik", "4 - Oylik (+Yotoqxona)"],
         ],
         remove_keyboard: true,
         one_time_keyboard: true,
