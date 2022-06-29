@@ -11,10 +11,8 @@
     "telegraf": "^4.8.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bot": "node bot.js",
-    "server": "node server.js",
-    "start": "npm run bot && npm run server"
+    "dev": "nodemon bot.js",
+    "start": "node bot.js"
   },
   "author": "",
   "license": "ISC"
