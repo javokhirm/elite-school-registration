@@ -21,6 +21,7 @@ paymentScene.enter((ctx) =>
           ["2 - Yillik", "4 - (+Yotoqxona)"],
         ],
         remove_keyboard: true,
+        one_time_keyboard: true,
       },
     }
   )

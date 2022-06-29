@@ -8,7 +8,6 @@ if (!process.env.BOT_TOKEN) {
 const config = {
   db: process.env.MONGODB_URL,
   token: process.env.BOT_TOKEN,
-  port: process.env.PORT,
 };
 
 export default config;

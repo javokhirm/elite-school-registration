@@ -9,6 +9,7 @@ gradeScene.enter((ctx) =>
         ["1", "2"],
         ["3", "4"],
       ],
+      one_time_keyboard: true,
       remove_keyboard: true,
     },
   })
