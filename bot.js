@@ -27,16 +27,10 @@ bot.use(session());
 bot.use(stage.middleware());
 
 bot.command("start", (ctx) => {
-  return ctx.reply(
-    `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`,
-    {
-      reply_markup: {
-        inline_keyboard: [[{ text: "Boshlash", callback_data: "boshlash" }]],
-      },
-    }
+  ctx.reply(
+    `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`
   );
+  return ctx.scene.enter("nameScene");
 });
-
-bot.action("boshlash", (ctx) => ctx.scene.enter("nameScene"));
 
 bot.launch();
