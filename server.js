@@ -1,8 +1,7 @@
 import express from "express";
 import Candidate from "./models/Candidate.js";
-import config from "./config/index.js";
 const app = express();
-const port = config.port || 5001;
+const port = process.env.PORT || 5001;
 import "./db.js";
 
 app.get("/candidates", async (req, res) => {
