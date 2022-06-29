@@ -3,7 +3,7 @@ import "./db.js";
 import Candidate from "./models/Candidate.js";
 import Contact from "./models/Contact.js";
 const app = express();
-const cors = require("cors");
+import cors from "cors";
 const port = process.env.PORT || 5001;
 
 // import telegram bot server
@@ -13,6 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
+  return res.send("Hello user!");
+});
+
+app.get("/candidates", async (req, res) => {
   const candidates = await Candidate.find();
   return res.status(200).json(candidates);
 });
