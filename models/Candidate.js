@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 
 const candidateSchame = new mongoose.Schema({
   full_name: String,
+  username: String,
+  tg_name: String,
+  tg_phone_number: String,
   age: String,
   address: String,
   grade: String,

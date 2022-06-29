@@ -27,6 +27,25 @@ bot.use(session());
 bot.use(stage.middleware());
 
 bot.command("start", (ctx) => {
+  ctx.session.candidate = {};
+  ctx.session.candidate.username = ctx.message.from.username;
+
+  return ctx.reply(
+    "Ro'yxatdan o'tish jarayonini boshlashdan oldin telefon raqamingizni yuboring.",
+    {
+      reply_markup: {
+        keyboard: [
+          [{ text: "📲 Telefon raqamni ulashish", request_contact: true }],
+        ],
+        remove_keyboard: true,
+        one_time_keyboard: true,
+      },
+    }
+  );
+});
+
+bot.on("contact", (ctx) => {
+  ctx.session.candidate.tg_phone_number = ctx.message.contact.phone_number;
   ctx.reply(
     `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`
   );
