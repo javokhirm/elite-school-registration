@@ -3,11 +3,13 @@ import "./db.js";
 import Candidate from "./models/Candidate.js";
 import Contact from "./models/Contact.js";
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5001;
 
 // import telegram bot server
 import "./bot.js";
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
