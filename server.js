@@ -1,75 +1,39 @@
-import { Telegraf, Scenes, session } from "telegraf";
-import config from "./config/index.js";
-import "./db.js";
-import addressScene from "./scenes/addressScene.js";
-import ageScene from "./scenes/ageScene.js";
-import contactScene from "./scenes/contactScene.js";
-import fatherScene from "./scenes/fatherScene.js";
-import gradeScene from "./scenes/gradeScene.js";
-import motherScene from "./scenes/motherScene.js";
-import nameScene from "./scenes/nameScene.js";
-import paymentScene from "./scenes/paymentScene.js";
-
-// -------EXPRESS APP-----------
 import express from "express";
+import "./db.js";
 import Candidate from "./models/Candidate.js";
+import Contact from "./models/Contact.js";
 const app = express();
 const port = process.env.PORT || 5001;
+
+// import telegram bot server
+import "./bot.js";
+
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   const candidates = await Candidate.find();
   return res.status(200).json(candidates);
 });
 
+app.post("/contacts", async (req, res) => {
+  const { full_name, phone_number, comment } = req.body;
+  if (!full_name || !phone_number || !comment) {
+    return res.status(400).json({ message: "Hamma katakni to'ldiring" });
+  }
+  const contact = new Contact({
+    full_name,
+    phone_number,
+    comment,
+  });
+  await contact.save();
+  return res.status(200).json({ message: "Message sent!" });
+});
+
+app.get("/contacts", async (req, res) => {
+  const contacts = await Contact.find();
+  return res.status(200).json(contacts);
+});
+
 app.listen(port, () => {
   console.log("Server started working on port", port);
 });
-
-//------------BOT---------------
-
-const bot = new Telegraf(config.token);
-
-const stage = new Scenes.Stage([
-  nameScene,
-  ageScene,
-  addressScene,
-  gradeScene,
-  fatherScene,
-  motherScene,
-  paymentScene,
-  contactScene,
-]);
-
-bot.use(session());
-bot.use(stage.middleware());
-
-bot.command("start", (ctx) => {
-  ctx.session.candidate = {};
-  ctx.session.candidate.username = ctx.message.from.username;
-
-  return ctx.reply(
-    "Ro'yxatdan o'tish jarayonini boshlashdan oldin telefon raqamingizni yuboring.",
-    {
-      reply_markup: {
-        keyboard: [
-          [{ text: "📲 Telefon raqamni ulashish", request_contact: true }],
-        ],
-        remove_keyboard: true,
-        one_time_keyboard: true,
-      },
-    }
-  );
-});
-
-bot.on("contact", (ctx) => {
-  ctx.session.candidate.tg_phone_number = ctx.message.contact.phone_number;
-  ctx.reply(
-    `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`
-  );
-  return ctx.scene.enter("nameScene");
-});
-
-bot.launch();
-
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));
