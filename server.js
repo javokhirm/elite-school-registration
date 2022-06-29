@@ -16,7 +16,7 @@ import Candidate from "./models/Candidate.js";
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.get("/candidates", async (req, res) => {
+app.get("/", async (req, res) => {
   const candidates = await Candidate.find();
   return res.status(200).json(candidates);
 });
