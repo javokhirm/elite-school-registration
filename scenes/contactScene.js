@@ -8,7 +8,6 @@ contactScene.enter((ctx) => ctx.reply("☎️ Telefon raqami:"));
 
 contactScene.on("text", (ctx) => {
   ctx.session.candidate.phone_number = ctx.message.text;
-  console.log(ctx.session);
   return ctx.scene.leave();
 });
 

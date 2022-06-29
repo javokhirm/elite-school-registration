@@ -40,7 +40,3 @@ bot.command("start", (ctx) => {
 bot.action("boshlash", (ctx) => ctx.scene.enter("nameScene"));
 
 bot.launch();
-
-// Enable graceful stop
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));

@@ -2,6 +2,8 @@ import express from "express";
 import Candidate from "./models/Candidate.js";
 import config from "./config/index.js";
 const app = express();
+import dotenv from "dotenv";
+dotenv.config();
 const port = process.env.PORT || 8080;
 import "./db.js";
 
