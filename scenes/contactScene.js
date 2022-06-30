@@ -19,9 +19,20 @@ contactScene.leave(async (ctx) => {
 
     await candidate.save();
 
-    return ctx.reply(
-      "Ro'yxatdan muvaffaqqiyatli o'tdingiz! ✅ Bizning xodimlarimiz tez orada siz bilan bog'lanishadi."
+    await ctx.reply(
+      `Ro'yxatdan muvaffaqqiyatli o'tdingiz! ✅ Bizning xodimlarimiz tez orada siz bilan bog'lanishadi.`
     );
+
+    await ctx.reply(`Yana kimnidir ro'yxatdan o'tkazmoqchimisiz?`, {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "Ha", callback_data: "register" },
+            { text: "Yo'q", callback_data: "quit" },
+          ],
+        ],
+      },
+    });
   } catch (error) {
     return ctx.reply(
       "Ro'yxatdan o'tishda xatolik yuz berdi! Qaytadan urinib ko'ring."

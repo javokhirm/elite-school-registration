@@ -27,11 +27,19 @@ bot.use(stage.middleware());
 
 bot.command("start", (ctx) => {
   ctx.session.candidate = {};
-  ctx.session.candidate.username = ctx.message.from.username;
+  ctx.session.candidate.telegram_details.first_name =
+    ctx.message.from.first_name;
+  ctx.session.candidate.telegram_details.last_name = ctx.message.from.last_name;
+  ctx.session.candidate.telegram_details.user_id = ctx.message.from.id;
+  ctx.session.candidate.telegram_details.chat_id = ctx.message.chat.id;
 
   ctx.reply(
     `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`
   );
+  return ctx.scene.enter("nameScene");
+});
+
+bot.action("register", (ctx) => {
   return ctx.scene.enter("nameScene");
 });
 
