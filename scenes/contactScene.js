@@ -31,6 +31,8 @@ contactScene.leave(async (ctx) => {
             { text: "Yo'q", callback_data: "quit" },
           ],
         ],
+        one_time_keyboard: true,
+        remove_keyboard: true,
       },
     });
   } catch (error) {

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const candidateSchame = new mongoose.Schema({
   full_name: String,
-  telegram_details: Object,
+  telegram: Object,
   age: String,
   address: String,
   grade: String,

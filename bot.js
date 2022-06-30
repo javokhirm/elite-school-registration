@@ -25,15 +25,15 @@ const stage = new Scenes.Stage([
 bot.use(session());
 bot.use(stage.middleware());
 
-bot.command("start", (ctx) => {
+bot.command("start", async (ctx) => {
   ctx.session.candidate = {};
-  ctx.session.candidate.telegram_details.first_name =
-    ctx.message.from.first_name;
-  ctx.session.candidate.telegram_details.last_name = ctx.message.from.last_name;
-  ctx.session.candidate.telegram_details.user_id = ctx.message.from.id;
-  ctx.session.candidate.telegram_details.chat_id = ctx.message.chat.id;
+  ctx.session.candidate.telegram = {};
+  ctx.session.candidate.telegram.first_name = ctx.message.from.first_name;
+  ctx.session.candidate.telegram.last_name = ctx.message.from.last_name;
+  ctx.session.candidate.telegram.user_id = ctx.message.from.id;
+  ctx.session.candidate.telegram.chat_id = ctx.message.chat.id;
 
-  ctx.reply(
+  await ctx.reply(
     `Salom ${ctx.message.from.first_name}! ${ctx.botInfo.first_name} botiga xush kelibsiz. Ro'yxatdan o'tish uchun quyidagi savollarga javob bering.`
   );
   return ctx.scene.enter("nameScene");
@@ -41,6 +41,10 @@ bot.command("start", (ctx) => {
 
 bot.action("register", (ctx) => {
   return ctx.scene.enter("nameScene");
+});
+
+bot.action("quit", (ctx) => {
+  return ctx.reply("Rahmat!😊");
 });
 
 bot.launch();
