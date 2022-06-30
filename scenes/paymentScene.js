@@ -6,7 +6,7 @@ paymentScene.enter((ctx) =>
   ctx.reply(
     `💳 Siz qanaqa to'lov turini afzal ko'rgan bo'lardingiz?
   
-  1️⃣ Oylik - 2.000.000 so'm
+  1️⃣ Oylik - 2.200.000 so'm
 
   2️⃣ Yillik - o'quv yili uchun oldindan to'liq to'lov qiluvchilarga chegirma bilan - 2.000.000 so'm
 
